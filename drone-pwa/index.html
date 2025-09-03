@@ -36,7 +36,7 @@
   <script src="app.js"></script>
   <script>
     if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('sw.js')
+      navigator.serviceWorker.register('sw.js?v=2')
         .then(() => console.log('Service Worker registered'))
         .catch(err => console.error('SW registration failed:', err));
     }
