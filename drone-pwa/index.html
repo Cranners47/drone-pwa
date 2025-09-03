@@ -1,20 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#000000">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Drone Data Comparator</title>
   <link rel="manifest" href="manifest.json">
-  <link rel="apple-touch-icon" href="assets/icon-192.png">
-  <title>Drone vs Sensor Comparator</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body { font-family: Arial, sans-serif; margin: 2rem; }
+    h1 { color: #2c3e50; }
+    label { display: block; margin-top: 1rem; }
+    input[type="file"], input[type="number"] { margin-top: 0.5rem; }
+    button { margin-top: 1rem; padding: 0.5rem 1rem; }
+  </style>
 </head>
-<body> … 
-  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
-  <script src="script.js"></script>
+<body>
+  <h1>Drone Data Comparator</h1>
+
+  <label>Upload Truth Data (CSV):
+    <input type="file" id="truthFile" accept=".csv">
+  </label>
+
+  <label>Upload Sensor Data (CSV):
+    <input type="file" id="sensorFile" accept=".csv">
+  </label>
+
+  <label>Set tolerance (meters):
+    <input type="number" id="tolerance" value="10">
+  </label>
+
+  <button id="processBtn">Process & Download CSV</button>
+
+  <p id="status"></p>
+
+  <script src="app.js"></script>
   <script>
     if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js');
-      });
+      navigator.serviceWorker.register('sw.js')
+        .then(() => console.log('Service Worker registered'))
+        .catch(err => console.error('SW registration failed:', err));
     }
   </script>
 </body>
+</html>
